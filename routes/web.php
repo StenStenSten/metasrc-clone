@@ -1,20 +1,23 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LeagueController;
 
 Route::get('/', function () {
-    return view('home');
+    return view(view: 'home');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/league/ranked', [LeagueController::class, 'ranked']);
+    return view(view: 'league.ranked');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::get('/league/aram', [LeagueController::class, 'aram']);
+    return view(view: 'league.aram');
 
-require __DIR__.'/auth.php';
+Route::get('/league/arena', [LeagueController::class, 'arena']);
+    return view(view: 'league.arena');
+
+Route::get('/league/swiftplay', [LeagueController::class, 'swiftplay']);
+    return view(view: 'league.swiftplay');
+
+
