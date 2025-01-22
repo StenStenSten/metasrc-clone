@@ -10,6 +10,15 @@
 
 <body class="bg-gray-100">
 
+<div id="left-nav-menu" class="left-nav">
+        <ul>
+            <li><a href="#league-of-legends">League of Legends</a></li>
+            <li><a href="#teamfight-tactics">Teamfight Tactics</a></li>
+            <li><a href="#valorant">Valorant</a></li>
+            <li><a href="#world-of-warcraft">World of Warcraft</a></li>
+        </ul>
+    </div>
+
 <div class="navbar">
 
     <div class="flex-1 text-right">
@@ -33,7 +42,7 @@
     </div>
 
     <section class="p-8 bg-white">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-screen-lg mx-auto">
+    <div class="section-boxes">
         <!-- Box 1 -->
         <div id="league-of-legends" class="p-6 bg-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow bg-cover bg-center"
             style="background-image: url('{{ asset('backgrounds/bg-summoners-rift.webp') }}');">
@@ -132,7 +141,67 @@
     </div>
 </section>
 
+<footer class="footer bg-gray-900 text-gray-300 py-6">
+    <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center sm:text-left">
+        <!-- League of Legends Section -->
+        <div class="footer-section">
+            <h3 class="text-lg font-semibold text-yellow-500 mb-3 flex items-center">
+                <img src="pictures/lol_icon.webp" alt="League of Legends" class="h-6 w-6 mr-2">
+                League of Legends
+            </h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-white">Ranked</a></li>
+                <li><a href="#" class="hover:text-white">ARAM</a></li>
+                <li><a href="#" class="hover:text-white">Arena</a></li>
+                <li><a href="#" class="hover:text-white">Swiftplay</a></li>
+                <li><a href="#" class="hover:text-white">Ultimate Spellbook</a></li>
+            </ul>
+        </div>
 
+        <!-- Teamfight Tactics Section -->
+        <div class="footer-section">
+            <h3 class="text-lg font-semibold text-yellow-500 mb-3 flex items-center">
+                <img src="pictures/tft_icon.webp" alt="Teamfight Tactics" class="h-6 w-6 mr-2">
+                Teamfight Tactics
+            </h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-white">Ranked</a></li>
+                <li><a href="#" class="hover:text-white">Hyper Roll</a></li>
+                <li><a href="#" class="hover:text-white">Double Up</a></li>
+                <li><a href="#" class="hover:text-white">Tocker's Trials</a></li>
+            </ul>
+        </div>
+
+        <!-- Valorant Section -->
+        <div class="footer-section">
+            <h3 class="text-lg font-semibold text-yellow-500 mb-3 flex items-center">
+                <img src="pictures/valorant_icon.webp" alt="Valorant" class="h-6 w-6 mr-2">
+                Valorant
+            </h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-white">Ranked</a></li>
+                <li><a href="#" class="hover:text-white">Spike Rush</a></li>
+            </ul>
+        </div>
+
+        <!-- World of Warcraft Section -->
+        <div class="footer-section">
+            <h3 class="text-lg font-semibold text-yellow-500 mb-3 flex items-center">
+                <img src="pictures/wow_icon.webp" alt="World of Warcraft" class="h-6 w-6 mr-2">
+                World of Warcraft
+            </h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-white">Class Guides</a></li>
+                <li><a href="#" class="hover:text-white">Tier Lists</a></li>
+                <li><a href="#" class="hover:text-white">Stats</a></li>
+                <li><a href="#" class="hover:text-white">Talent Calculator</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container mx-auto text-right mt-4">
+        <img src="{{ asset('pictures/logowithtext.webp') }}" alt="metasrc" class="footer-logo">
+    </div>
+</footer>
 
 </body>
 
@@ -165,12 +234,14 @@
         cursor: pointer;
         box-sizing: border-box;
         font-weight: bold;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
         }
     .nav-text-src {
         color: white;
         cursor: pointer;
         box-sizing: border-box;
         font-weight: bold;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
         }
     .middle-content-search {
         margin-top: 60px;
@@ -180,11 +251,13 @@
         cursor: pointer;
         }
     .section-boxes {
-            display: grid;
+            display: flex;
             grid-template-columns: repeat(4, 1fr); 
             gap: 1rem; 
             max-width: 100%;
             overflow-x: auto; 
+            margin:auto;
+            gap: 10rem;
         }
 
         .section-box {
@@ -231,7 +304,6 @@
             border: 4px solid rgb(93, 77, 59); 
             box-sizing: border-box;
             text-align: center;
-            transition: all 0.3s ease;
         }
         .icon-container {
             display: flex;
@@ -304,8 +376,6 @@
             margin: 95px;
             text-align: center;
             width: 100%; 
-            max-width: 600px;
-            min-height: 70vh; 
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -329,6 +399,125 @@
             align-items: center;
             text-decoration: none;
         }
+        .footer {
+            background-color: #353535; 
+            color: #aaa; 
+            padding: 1.5rem 0; 
+        }
+
+        .footer h3 {
+            color: #FBAF17; 
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer ul li a {
+            color: #FBAF17; 
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+        }
+
+        .footer ul li a:hover {
+            color: #FBAF17; 
+            text-decoration: underline;
+        }
+
+        .footer img {
+            height: 1.5rem;
+            width: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .footer .container {
+            display: flex;
+            flex-direction: row; 
+            gap: 20rem; 
+        }
+        .footer-logo {
+            display:flex;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .footer .container {
+                grid-template-columns: 1fr; 
+            }
+        }
+        /* Base styles for the side navigation */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 60px; /* Closed width */
+            height: 100%;
+            background-color: #333; /* Dark background */
+            overflow-x: hidden;
+            transition: width 0.3s ease; /* Smooth transition for hover effect */
+            z-index: 1000;
+        }
+
+        /* Open the nav menu on hover */
+        .side-nav:hover {
+            width: 200px; /* Expanded width */
+        }
+
+        /* Style for menu items */
+        .side-nav .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .side-nav .menu li {
+            padding: 20px 10px; /* Space around each menu item */
+        }
+
+        .side-nav .menu li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            white-space: nowrap; /* Prevent text wrapping */
+            opacity: 0; /* Hidden text initially */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateX(-20px); /* Slide-in effect */
+        }
+
+        /* When hovering, make the text visible */
+        .side-nav:hover .menu li a {
+            opacity: 1; /* Show text */
+            transform: translateX(0); /* Reset position */
+        }
+
+        /* Add hover effects for links */
+        .side-nav .menu li a:hover {
+            color: #FBAF17; /* Highlight color */
+        }
+
+        /* Optional: Icons for the menu items */
+        .side-nav .menu li a::before {
+            content: "•"; /* Replace this with an icon if desired */
+            margin-right: 10px;
+            font-size: 18px;
+            color: #FBAF17; /* Icon color */
+            vertical-align: middle;
+        }
+
 
 
 </style>
