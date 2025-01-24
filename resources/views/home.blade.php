@@ -11,13 +11,17 @@
 <body class="bg-gray-100">
 
 <div id="left-nav-menu" class="left-nav">
-        <ul>
-            <li><a href="#league-of-legends">League of Legends</a></li>
-            <li><a href="#teamfight-tactics">Teamfight Tactics</a></li>
-            <li><a href="#valorant">Valorant</a></li>
-            <li><a href="#world-of-warcraft">World of Warcraft</a></li>
-        </ul>
-    </div>
+    <ul>
+        <li><a href="#league-of-legends">
+            <img src="{{ asset('pictures/lol_icon.webp') }}" alt="LoL">League of Legends</a></li>
+        <li><a href="#teamfight-tactics">
+            <img src="{{ asset('pictures/tft_icon.webp') }}" alt="TFT">Teamfight Tactics</a></li>
+        <li><a href="#valorant">
+            <img src="{{ asset('pictures/valorant_icon.webp') }}" alt="Valorant">Valorant</a></li>
+        <li><a href="#world-of-warcraft">
+            <img src="{{ asset('pictures/wow_icon.webp') }}" alt="WoW">World of Warcraft</a></li>
+    </ul>
+</div>
 
 <div class="navbar">
 
@@ -215,10 +219,16 @@
         justify-content: space-between;
         padding: 0 20px;
         background-color: #111111;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1001;
+        height: 70px;
     }
     .navbar input {
-        background-color: #333;
-        color: white;
+        background-color: white;
+        color: black;
         }
     .navbar img {
         height: 40px;
@@ -455,69 +465,67 @@
                 grid-template-columns: 1fr; 
             }
         }
-        /* Base styles for the side navigation */
-        .side-nav {
+        
+        .left-nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 60px; /* Closed width */
-            height: 100%;
-            background-color: #333; /* Dark background */
-            overflow-x: hidden;
-            transition: width 0.3s ease; /* Smooth transition for hover effect */
+            top: 70px;
+            left: 0px; 
+            width: 60px;
+            height: 100vh;
+            background-color: #111111;
+            transition: left 0.3s ease, width 0.3s ease;
             z-index: 1000;
         }
 
-        /* Open the nav menu on hover */
-        .side-nav:hover {
-            width: 200px; /* Expanded width */
+        .left-nav:hover {
+            width: 200px;
+            background-color: #111111;
         }
 
-        /* Style for menu items */
-        .side-nav .menu {
+        .left-nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            justify-content: center;
         }
 
-        .side-nav .menu li {
-            padding: 20px 10px; /* Space around each menu item */
+        .left-nav ul li {
+            padding: 20px;
+            text-align: left;
         }
 
-        .side-nav .menu li a {
+        .left-nav ul li a {
             color: #fff;
             text-decoration: none;
             font-size: 16px;
-            white-space: nowrap; /* Prevent text wrapping */
-            opacity: 0; /* Hidden text initially */
+            opacity: 0;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            transform: translateX(-20px); /* Slide-in effect */
+            transform: translateX(-50px);
+            padding-left: 10px;
+            display: flex;
+            white-space: nowrap;
         }
 
-        /* When hovering, make the text visible */
-        .side-nav:hover .menu li a {
-            opacity: 1; /* Show text */
-            transform: translateX(0); /* Reset position */
+        .left-nav:hover ul li a {
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        /* Add hover effects for links */
-        .side-nav .menu li a:hover {
-            color: #FBAF17; /* Highlight color */
+        .left-nav ul li a:hover {
+            color: #FBAF17;
         }
-
-        /* Optional: Icons for the menu items */
-        .side-nav .menu li a::before {
-            content: "•"; /* Replace this with an icon if desired */
+        .left-nav ul li a img {
+            width: 24px;
+            height: 24px;
             margin-right: 10px;
-            font-size: 18px;
-            color: #FBAF17; /* Icon color */
-            vertical-align: middle;
+            opacity: 0.8;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
+        .left-nav ul li a img:hover {
+            transform: scale(1.2);
+            opacity: 1;
+        }
 
-
+       
 </style>
+
