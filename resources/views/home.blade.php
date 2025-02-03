@@ -154,11 +154,10 @@
                 League of Legends
             </h3>
             <ul class="space-y-2">
-                <li><a href="#" class="hover:text-white">Ranked</a></li>
-                <li><a href="#" class="hover:text-white">ARAM</a></li>
-                <li><a href="#" class="hover:text-white">Arena</a></li>
-                <li><a href="#" class="hover:text-white">Swiftplay</a></li>
-                <li><a href="#" class="hover:text-white">Ultimate Spellbook</a></li>
+            <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/5v5_icon.webp') }}" alt="Ranked Icon" class="h-6 w-6 mr-2">Ranked</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/aram_icon.webp') }}" alt="ARAM Icon" class="h-6 w-6 mr-2">ARAM</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/arena_icon.webp') }}" alt="Arena Icon" class="h-6 w-6 mr-2">Arena</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/5v5_icon.webp') }}" alt="Swiftplay Icon" class="h-6 w-6 mr-2">Swiftplay</a></li>
             </ul>
         </div>
 
@@ -169,10 +168,10 @@
                 Teamfight Tactics
             </h3>
             <ul class="space-y-2">
-                <li><a href="#" class="hover:text-white">Ranked</a></li>
-                <li><a href="#" class="hover:text-white">Hyper Roll</a></li>
-                <li><a href="#" class="hover:text-white">Double Up</a></li>
-                <li><a href="#" class="hover:text-white">Tocker's Trials</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/tftmode_icon.webp') }}" alt="Ranked Icon" class="h-6 w-6 mr-2">Ranked</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/hyper_icon.webp') }}" alt="Hyper Roll Icon" class="h-6 w-6 mr-2">Hyper Roll</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/double_icon.webp') }}" alt="Double Up Icon" class="h-6 w-6 mr-2">Double Up</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/special_active_icon.webp') }}" alt="Tocker's Trials Icon" class="h-6 w-6 mr-2">Tocker's Trials</a></li>
             </ul>
         </div>
 
@@ -183,8 +182,8 @@
                 Valorant
             </h3>
             <ul class="space-y-2">
-                <li><a href="#" class="hover:text-white">Ranked</a></li>
-                <li><a href="#" class="hover:text-white">Spike Rush</a></li>
+                <li><a href="/valorant/valoranked" class="flex items-center hover:text-white"><img src="{{ asset('pictures/standard_icon.webp') }}" alt="Ranked Icon" class="h-6 w-6 mr-2">Ranked</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/spike_icon.webp') }}" alt="Spike Rush Icon" class="h-6 w-6 mr-2">Spike Rush</a></li>
             </ul>
         </div>
 
@@ -195,10 +194,10 @@
                 World of Warcraft
             </h3>
             <ul class="space-y-2">
-                <li><a href="#" class="hover:text-white">Class Guides</a></li>
-                <li><a href="#" class="hover:text-white">Tier Lists</a></li>
-                <li><a href="#" class="hover:text-white">Stats</a></li>
-                <li><a href="#" class="hover:text-white">Talent Calculator</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/all_roles.svg') }}" alt="Class Guides Icon" class="h-6 w-6 mr-2">Class Guides</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/nav_tierlist.webp') }}" alt="Tier Lists Icon" class="h-6 w-6 mr-2">Tier Lists</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/nav_stats.webp') }}" alt="Stats Icon" class="h-6 w-6 mr-2">Stats</a></li>
+                <li><a href="#" class="flex items-center hover:text-white"><img src="{{ asset('pictures/nav_builder.webp') }}" alt="Talent Calculator Icon" class="h-6 w-6 mr-2">Talent Calculator</a></li>
             </ul>
         </div>
     </div>
@@ -238,6 +237,7 @@
     body {
         margin: 0;
         background-color: #252525;
+        height: 100%;
         }
     .nav-text-meta {
         color: #FBAF17;
@@ -266,7 +266,10 @@
             gap: 1rem; 
             max-width: 100%;
             overflow-x: auto; 
-            margin:auto;
+            margin-left: 200px;
+            margin-right: auto;
+            margin-top: auto;
+            margin-bottom: 100px;   
             gap: 10rem;
         }
 
@@ -274,7 +277,7 @@
             background-size: cover;
             background-position: center;
             padding: 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease;
             flex-shrink: 0;
@@ -314,6 +317,7 @@
             border: 4px solid rgb(93, 77, 59); 
             box-sizing: border-box;
             text-align: center;
+            border-radius: 15px;
         }
         .icon-container {
             display: flex;
@@ -361,16 +365,19 @@
             border: 4px solid rgb(68, 77, 120); 
             box-sizing: border-box;
             text-align: center;
+            border-radius: 15px;
         }
         #valorant {
             border: 4px solid rgb(106, 38, 50); 
             box-sizing: border-box;
             text-align: center;
+            border-radius: 15px;
         }
         #world-of-warcraft {
             border: 4px solid rgb(130, 120, 105); 
             box-sizing: border-box;
             text-align: center;
+            border-radius: 15px;
         }
         .under-text {
             color: white;
@@ -413,6 +420,12 @@
             background-color: #353535; 
             color: #aaa; 
             padding: 1.5rem 0; 
+            z-index: 900;
+            margin-left: 60px;
+            flex-shrink: 0;
+            min-height: 150px;
+            width: 100%;
+            position: relative;
         }
 
         .footer h3 {
@@ -453,6 +466,7 @@
             display: flex;
             flex-direction: row; 
             gap: 20rem; 
+            padding-right: 60px;
         }
         .footer-logo {
             display:flex;
@@ -480,6 +494,7 @@
         .left-nav:hover {
             width: 200px;
             background-color: #111111;
+            z-index: 1001;
         }
 
         .left-nav ul {
