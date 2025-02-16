@@ -6,6 +6,7 @@
     height: 100vh;
     background-color: #111111;
     transition: left 0.3s ease, width 0.3s ease;
+    overflow: hidden;
     z-index: 1000;
 }
 
@@ -24,6 +25,7 @@
 .left-nav ul li {
     padding: 20px;
     text-align: left;
+    display: block;
 }
 
 .left-nav ul li a {
@@ -52,6 +54,7 @@
     margin-right: 10px;
     opacity: 0.8;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    object-fit: contain;
 }
 
 .left-nav ul li a img:hover {

@@ -27,6 +27,7 @@
 
     <div class="champion-grid-container">
         <div class="champion-grid">
+        <pre>{{ print_r($champions, true) }}</pre>
         @foreach ($champions['data'] as $champion)
             @php
                 $champion_name = $champion['id']; 

@@ -21,13 +21,13 @@ class LeagueController extends Controller
         ]);
 
         try {
-            // Fetch champions from Riot's Data Dragon API
             $response = $client->request('GET', 'https://ddragon.leagueoflegends.com/cdn/15.3.1/data/en_US/champion.json');
             $data = json_decode($response->getBody(), true);
-
-            // Extract only the champions from the "data" key
+        
+            \Log::info('Champions API Response:', $data); // Log the API response
+        
             $champions = $data['data'] ?? [];
-
+        
             return view('league.ranked', compact('champions'));
         } catch (RequestException $e) {
             \Log::error('Failed to fetch champions: ' . $e->getMessage());
