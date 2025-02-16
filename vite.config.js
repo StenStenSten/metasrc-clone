@@ -6,7 +6,12 @@ console.log('ENV VARIABLES:', process.env);
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',           // Main CSS file
+                'resources/css/components/navbar.css', // Add navbar.css
+                'resources/css/components/footer.css', // Add footer.css
+                'resources/js/app.js',             // JS file
+            ],
             refresh: true,
         }),
     ],
@@ -15,5 +20,3 @@ export default defineConfig({
         port: 5173, // Default port for Vite
     },
 });
-
- 

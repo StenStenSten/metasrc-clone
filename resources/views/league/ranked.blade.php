@@ -1,20 +1,3 @@
-<?php
-$api_url = "https://ddragon.leagueoflegends.com/cdn/12.6.1/data/en_US/champion.json";
-
-// Fetch the JSON data
-$json_data = file_get_contents($api_url);
-
-// Decode the JSON data into an associative array
-$champion_data = json_decode($json_data, true);
-
-// Check if data is retrieved successfully
-if ($champion_data && isset($champion_data['data'])) {
-    $champions = $champion_data['data']; // Array containing all champions
-} else {
-    echo "Error fetching champion data.";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,12 +5,11 @@ if ($champion_data && isset($champion_data['data'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>League of Legends - Ranked</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
     <div class="navbar">
-
         <div class="flex-1 text-right">
             <input type="text" class="p-2 text-lg rounded-md w-1/3 bg-gray-700 text-white"
                 placeholder="Search for a guide...">
@@ -41,24 +23,25 @@ if ($champion_data && isset($champion_data['data'])) {
         </div>
 
         <div class="flex-1"></div>
-
     </div>
-        <div class="champion-grid-container">
-            <div class="champion-grid">
-                <?php
-    // Loop through all champions and display their names and images
-    foreach ($champions as $champion) {
-    $champion_name = $champion['id']; // Champion's name
-    $champion_image = "https://ddragon.leagueoflegends.com/cdn/12.6.1/img/champion/{$champion_name}.png"; // Champion's image URL
-    echo "
-        <div class='champion-box'>
-            <img src='{$champion_image}' alt='{$champion_name}'>
-            <div class='champion-name'>{$champion_name}</div>
-        </div>";
-    }
-    ?>
+
+    <div class="champion-grid-container">
+        <div class="champion-grid">
+        @foreach ($champions['data'] as $champion)
+            @php
+                $champion_name = $champion['id']; 
+                $champion_image = "https://ddragon.leagueoflegends.com/cdn/15.3.1/img/champion/{$champion['image']['full']}";
+            @endphp
+
+            <div class="champion-box">
+                <img src="{{ $champion_image }}" alt="{{ $champion_name }}">
+                <div class="champion-name">{{ $champion['name'] }}</div> <!-- Display champion name -->
             </div>
+            @endforeach
         </div>
+    </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const championBoxes = document.querySelectorAll('.champion-box');
@@ -123,6 +106,7 @@ if ($champion_data && isset($champion_data['data'])) {
         width: 100vw;  
         height: 100vh;
     }
+
     .nav-text-meta {
         color: #FBAF17;
         cursor: pointer;
