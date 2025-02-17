@@ -39,6 +39,21 @@ body {
     gap: 1rem;
 }
 
+.nav-text-meta {
+    color: #FBAF17;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+.nav-text-src {
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+
 @media (min-width: 640px) {
     .section-boxes {
         grid-template-columns: repeat(2, 1fr); 

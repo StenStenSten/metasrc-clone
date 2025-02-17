@@ -8,7 +8,7 @@
     <div class="navbar__logo">
         <a href="{{ url('/') }}">
             <img src="{{ asset('pictures/mainlogo.webp') }}" alt="Logo" class="navbar__logo-img">
-            <b class="logo-text logo-text--yellow">META</b><b class="logo-text logo-text--red">src</b>
+            <b class="nav-text-meta">META</b><b class="nav-text-src">src</b>
         </a>
     </div>
 

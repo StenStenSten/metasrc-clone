@@ -98,27 +98,6 @@
                 </div>
             </div>
 
-            <!-- Box 4: World of Warcraft -->
-            <div id="world-of-warcraft" class="section-box">
-                <h3 class="section-title">World of Warcraft</h3>
-                <div class="section-item">
-                    <img src="{{ asset('pictures/all_roles.svg') }}" alt="Class Guides Icon" class="icon-small">
-                    <p class="under-text">Class Guides</p>
-                </div>
-                <div class="section-item">
-                    <img src="{{ asset('pictures/nav_tierlist.webp') }}" alt="Tier Lists Icon" class="icon-small">
-                    <p class="under-text">Tier Lists</p>
-                </div>
-                <div class="section-item">
-                    <img src="{{ asset('pictures/nav_stats.webp') }}" alt="Stats Icon" class="icon-small">
-                    <p class="under-text">Stats</p>
-                </div>
-                <div class="section-item">
-                    <img src="{{ asset('pictures/nav_builder.webp') }}" alt="Talent Calculator Icon" class="icon-small">
-                    <p class="under-text">Talent Calculator</p>
-                </div>
-            </div>
-
         </div>
     </section>
 

@@ -1,26 +1,12 @@
-body {
+    body {
     margin: 0;
     background-color: #252525;
     height: 100%;
     }
-.nav-text-meta {
-    color: #FBAF17;
-    cursor: pointer;
-    box-sizing: border-box;
-    font-weight: bold;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    }
-.nav-text-src {
-    color: white;
-    cursor: pointer;
-    box-sizing: border-box;
-    font-weight: bold;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    }
-.middle-content-search {
+    .middle-content-search {
     margin-top: 60px;
     }
-.middle-content-search img {
+    .middle-content-search img {
     height: 150px;
     cursor: pointer;
     }
@@ -116,11 +102,7 @@ body {
     #valorant {
         border: 4px solid rgb(106, 38, 50);
     }
-    
-    #world-of-warcraft {
-        border: 4px solid rgb(130, 120, 105);
-    }
-    
+
     .under-text {
         color: white;
         cursor: pointer;
