@@ -1,0 +1,138 @@
+.navbar {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #111111;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.navbar input {
+    background-color: white;
+    color: black;
+}
+
+.navbar img {
+    height: 40px;
+    cursor: pointer;
+}
+
+body {
+    margin: 0;
+    background-color: #252525;
+    overflow-x: hidden;
+    background-image: url("{{ asset('backgrounds/bg-summoners-rift.webp') }}");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+    width: 100vw;  
+    height: 100vh;
+}
+
+.nav-text-meta {
+    color: #FBAF17;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.nav-text-src {
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.champion-grid-container {
+    margin-top: 80px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.champion-grid {
+    display: grid;
+    min-width: 375px;
+    max-width: 1200px;
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    justify-content: center;
+    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+}
+
+.champion-box {
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: #333;
+    width: 80px;
+    height: 80px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.champion-box img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.champion-name {
+    margin-top: 5px;
+    font-size: 12px;
+    color: white;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.champion-box:hover {
+    background-color: #FBAF17;
+    transform: scale(1.05);
+}
+
+.champion-box:hover~.champion-box {
+    background-color: #555;
+}
+
+.champion-grid .champion-box:not(:hover) {
+    background-color: #333;
+}
+
+.champion-box:hover img {
+    filter: grayscale(0);
+}
+
+.champion-box img.grayscale {
+    filter: grayscale(100%);
+}
+
+.champion-box.inactive img {
+    filter: grayscale(100%);
+}
+
+@media (max-width: 1024px) {
+    .champion-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .champion-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .champion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

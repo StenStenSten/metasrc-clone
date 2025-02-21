@@ -15,9 +15,10 @@
     @vite(['resources/css/app.css', 'resources/css/components/navbar.css', 'resources/css/components/footer.css'])
 </head>
 <body>
-    <div class="left-nav">
-        <!-- Left Navbar -->
-        @include('partials.left-navbar')
+    <div class="wrapper">
+    <!--<div class="left-nav">
+        
+        @include('partials.left-navbar') -->
 
         <!-- Main Content Area -->
         <div class="navbar">
@@ -37,10 +38,11 @@
             <main>
                 @yield('content') <!-- Yield the content section here -->
             </main>
+            </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    @include('partials.footer')
+        <!-- Footer -->
+        @include('partials.footer')
+    </div>
 </body>
 </html>

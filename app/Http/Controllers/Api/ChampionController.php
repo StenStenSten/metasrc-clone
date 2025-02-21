@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 
 class ChampionController extends Controller
 {
-    public function getChampions()
+    public function index()
     {
         $client = new Client();
 
@@ -18,10 +18,11 @@ class ChampionController extends Controller
 
             $champions = json_decode($response->getBody()->getContents(), true);
 
-            return response()->json($champions);
+            // Pass data to Blade view
+            return view('champions.index', compact('champions'));
 
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            return response()->json(['message' => 'Failed to fetch champions data.'], 500);
+            return view('champions.index')->with('error', 'Failed to fetch champions data.');
         }
     }
 }

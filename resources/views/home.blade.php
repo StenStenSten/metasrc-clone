@@ -3,10 +3,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/css/pages/home.css'])
 </head>
 
-<body class="bg-gray-100">
+<body>
 
 @extends('layouts.app')
 
@@ -17,10 +17,10 @@
 @endsection
 
 @section('content')
-    <div id="middle-logoandtext" class="flex flex-col items-center justify-center mt-20 px-4">
+    <div class="middle-logoandtext">
         <img src="{{ asset('pictures/logowithtext.webp') }}" alt="metasrc" class="w-full">
-        <div id="middle-text" class="text-white mb-4">Statistical Builds, Guides & Tier Lists</div>
-        <input type="text" class="p-2 text-lg rounded-md w-1/3 bg-white text-black" placeholder="Search for a guide...">
+        <div class="middle-text">Statistical Builds, Guides & Tier Lists</div>
+        <input type="text" placeholder="Search for a guide...">
     </div>
 
     <section class="section-container">
@@ -101,6 +101,13 @@
         </div>
     </section>
 
+    @push('styles')
+    <style>
+        #league-of-legends {
+            background-image: url("{{ asset('backgrounds/bg-summoners-rift.webp') }}");
+        }
+    </style>
+    @endpush
 @endsection
 
 </body>
