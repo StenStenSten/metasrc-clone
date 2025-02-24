@@ -21,7 +21,7 @@
                 Teamfight Tactics
             </h3>
             <ul class="footer-list">
-                <li><a href="#"><img src="{{ asset('pictures/tftmode_icon.webp') }}" alt="Ranked Icon" class="footer-icon">Ranked</a></li>
+                <li><a href="/tft/tftranked"><img src="{{ asset('pictures/tftmode_icon.webp') }}" alt="Ranked Icon" class="footer-icon">Ranked</a></li>
                 <li><a href="#"><img src="{{ asset('pictures/hyper_icon.webp') }}" alt="Hyper Roll Icon" class="footer-icon">Hyper Roll</a></li>
                 <li><a href="#"><img src="{{ asset('pictures/double_icon.webp') }}" alt="Double Up Icon" class="footer-icon">Double Up</a></li>
                 <li><a href="#"><img src="{{ asset('pictures/special_active_icon.webp') }}" alt="Tocker's Trials Icon" class="footer-icon">Tocker's Trials</a></li>
