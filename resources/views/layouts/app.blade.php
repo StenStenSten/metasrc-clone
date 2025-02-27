@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}?v=1" type="image/x-icon">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -13,36 +14,31 @@
 
     <!-- Stylesheets -->
     @vite(['resources/css/app.css', 'resources/css/components/navbar.css', 'resources/css/components/footer.css'])
+
+    <!-- Add page-specific styles here -->
+    @stack('styles')
 </head>
 <body>
     <div class="wrapper">
-    <!--<div class="left-nav">
-        
-        @include('partials.left-navbar') -->
+        <!--<div class="left-nav">
+            @include('partials.left-navbar') 
+        --> 
 
-        <!-- Main Content Area -->
+        <!-- Navbar (Top) -->
         <div class="navbar">
-            <!-- Navbar (Top) -->
             @include('partials.navbar')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="page-header">
-                    <div class="header-container">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
 
             <!-- Page Content -->
             <main>
                 @yield('content') <!-- Yield the content section here -->
             </main>
-            </div>
         </div>
 
         <!-- Footer -->
         @include('partials.footer')
     </div>
+
+    <!-- Add page-specific scripts here -->
+    @stack('scripts')
 </body>
 </html>
