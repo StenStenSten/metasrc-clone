@@ -27,12 +27,12 @@
         <!-- Navbar (Top) -->
         <div class="navbar">
             @include('partials.navbar')
+        </div>
 
             <!-- Page Content -->
             <main>
                 @yield('content') <!-- Yield the content section here -->
             </main>
-        </div>
 
         <!-- Footer -->
         @include('partials.footer')

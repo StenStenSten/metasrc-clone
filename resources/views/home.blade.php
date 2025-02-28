@@ -18,7 +18,7 @@
 
 @section('content')
     <div class="middle-logoandtext">
-        <img src="{{ asset('pictures/logowithtext.webp') }}" alt="metasrc" class="w-full">
+        <img src="{{ asset('pictures/logowithtext.webp') }}" alt="metasrc" class="middle-logo">
         <div class="middle-text">Statistical Builds, Guides & Tier Lists</div>
         <input type="text" placeholder="Search for a guide...">
     </div>
@@ -105,6 +105,12 @@
     <style>
         #league-of-legends {
             background-image: url("{{ asset('backgrounds/bg-summoners-rift.webp') }}");
+        }
+        #teamfight-tactics{
+            background-image: url("{{ asset('backgrounds/bg-tft-galaxies.webp') }}");
+        }
+        #valorant{
+            background-image: url("{{ asset('backgrounds/bg-valorant.webp') }}");
         }
     </style>
     @endpush

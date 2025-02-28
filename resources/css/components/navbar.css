@@ -22,23 +22,6 @@
     cursor: pointer;
 }
 
-
-body {
-    padding-top: 60px; 
-}
-
-
-.section-container {
-    margin-top: 60px; 
-}
-
-
-.section-boxes {
-    display: grid;
-    grid-template-columns: 1fr; 
-    gap: 1rem;
-}
-
 .nav-text-meta {
     color: #FBAF17;
     cursor: pointer;
