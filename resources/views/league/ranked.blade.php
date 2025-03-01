@@ -2,9 +2,8 @@
 
 @section('title', 'Ranked Page')
 
-<!-- Push ranked.css to the stack (this will only load on this page) -->
 @push('styles')
-    @vite('resources/css/pages/ranked.css') <!-- Only add ranked.css on this page -->
+    @vite('resources/css/pages/ranked.css') 
 @endpush
 
 @section('content')
@@ -17,10 +16,11 @@
                         $champion_image = "https://ddragon.leagueoflegends.com/cdn/15.3.1/img/champion/{$champion['image']['full']}";
                     @endphp
 
-                    <div class="champion-box">
+                    <!-- Make each champion box clickable -->
+                    <a href="{{ route('champion.show', ['game_mode' => 'ranked', 'champion_name' => $champion_name]) }}" class="champion-box">
                         <img src="{{ $champion_image }}" alt="{{ $champion_name }}">
                         <div class="champion-name">{{ $champion['name'] }}</div>
-                    </div>
+                    </a>
                 @endforeach
             @else
                 <p class="text-white text-center">No champions found.</p>
@@ -28,6 +28,12 @@
         </div>
     </div>
 @endsection
+
+<style>
+    body {
+        background-image: url('{{ asset('backgrounds/bg-summoners-rift.webp') }}');
+    }
+</style>
 
 @push('scripts')
     <script>

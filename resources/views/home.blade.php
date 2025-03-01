@@ -13,6 +13,8 @@
 @section('title', 'Home Page')
 
 @section('navbar')
+
+@section('left-navbar')
   
 @endsection
 

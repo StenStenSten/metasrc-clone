@@ -6,36 +6,36 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('favicon.ico') }}?v=1" type="image/x-icon">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'METAsrc clone') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Stylesheets -->
-    @vite(['resources/css/app.css', 'resources/css/components/navbar.css', 'resources/css/components/footer.css'])
+    @vite(['resources/css/app.css', 'resources/css/components/navbar.css', 'resources/css/components/footer.css','resources/css/components/left-navbar.css'])
 
     <!-- Add page-specific styles here -->
     @stack('styles')
 </head>
 <body>
     <div class="wrapper">
-        <!--<div class="left-nav">
+        <div class="left-nav">
             @include('partials.left-navbar') 
-        --> 
-
-        <!-- Navbar (Top) -->
-        <div class="navbar">
-            @include('partials.navbar')
         </div>
-
+            
+            <!-- Navbar (Top) -->
+            <div class="navbar">
+                @include('partials.navbar')
+            </div>
+            
             <!-- Page Content -->
             <main>
                 @yield('content') <!-- Yield the content section here -->
             </main>
-
-        <!-- Footer -->
-        @include('partials.footer')
+            
+            <!-- Footer -->
+            @include('partials.footer')
     </div>
 
     <!-- Add page-specific scripts here -->

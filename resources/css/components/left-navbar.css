@@ -1,13 +1,13 @@
 .left-nav {
     position: fixed;
-    top: 70px;
+    top: 60px;
     left: 0px; 
     width: 60px;
     height: 100vh;
-    background-color: #111111;
+    background-color: #111111; 
     transition: left 0.3s ease, width 0.3s ease;
-    overflow: hidden;
-    z-index: 1000;
+    overflow: visible;
+    z-index: 9999;
 }
 
 .left-nav:hover {
@@ -60,4 +60,78 @@
 .left-nav ul li a img:hover {
     transform: scale(1.2);
     opacity: 1;
+}
+
+.dropdown {
+    width: 100%;
+}
+
+/* Main link styling */
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropdown-toggle img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Arrow icon */
+.arrow {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotate arrow when active */
+.dropdown.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Hidden by default */
+    background-color: #222;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-menu li {
+    padding: 5px 10px;
+}
+
+/* Links inside dropdown */
+.dropdown-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu a img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Hover effect */
+.dropdown-menu a:hover {
+    background-color: #333;
+}
+
+/* Make dropdown visible when active */
+.dropdown.active .dropdown-menu {
+    display: block;
 }

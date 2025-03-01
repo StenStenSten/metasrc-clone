@@ -1,27 +1,3 @@
-.navbar {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    background-color: #111111;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-}
-
-.navbar input {
-    background-color: white;
-    color: black;
-}
-
-.navbar img {
-    height: 40px;
-    cursor: pointer;
-}
-
 body {
     margin: 0;
     background-color: #252525;
@@ -33,22 +9,6 @@ body {
     background-size: cover; 
     width: 100vw;  
     height: 100vh;
-}
-
-.nav-text-meta {
-    color: #FBAF17;
-    cursor: pointer;
-    box-sizing: border-box;
-    font-weight: bold;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-
-.nav-text-src {
-    color: white;
-    cursor: pointer;
-    box-sizing: border-box;
-    font-weight: bold;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 .champion-grid-container {

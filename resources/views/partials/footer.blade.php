@@ -40,22 +40,9 @@
             </ul>
         </div>
 
-        <!-- World of Warcraft Section -->
-        <div class="footer-section">
-            <h3 class="footer-title">
-                <img src="pictures/wow_icon.webp" alt="World of Warcraft" class="footer-icon">
-                World of Warcraft
-            </h3>
-            <ul class="footer-list">
-                <li><a href="#"><img src="{{ asset('pictures/all_roles.svg') }}" alt="Class Guides Icon" class="footer-icon">Class Guides</a></li>
-                <li><a href="#"><img src="{{ asset('pictures/nav_tierlist.webp') }}" alt="Tier Lists Icon" class="footer-icon">Tier Lists</a></li>
-                <li><a href="#"><img src="{{ asset('pictures/nav_stats.webp') }}" alt="Stats Icon" class="footer-icon">Stats</a></li>
-                <li><a href="#"><img src="{{ asset('pictures/nav_builder.webp') }}" alt="Talent Calculator Icon" class="footer-icon">Talent Calculator</a></li>
-            </ul>
-        </div>
-    </div>
+       
 
-    <div class="footer-bottom">
+    <div class="footer-section">
         <img src="{{ asset('pictures/logowithtext.webp') }}" alt="metasrc" class="footer-logo">
     </div>
 </footer>

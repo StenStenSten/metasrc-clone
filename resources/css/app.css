@@ -7,7 +7,7 @@
 @import url('/css/variables.css');
 @import url('/css/layouts/footer.css');
 @import './components/navbar.css';
-@import './components/left-navbar.css';
+@import url('/css/components/left-navbar.css');
 @import './components/footer.css';
 
 
