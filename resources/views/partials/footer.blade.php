@@ -10,7 +10,6 @@
                 <li><a href="/league/ranked"><img src="{{ asset('pictures/5v5_icon.webp') }}" alt="Ranked Icon" class="footer-icon">Ranked</a></li>
                 <li><a href="#"><img src="{{ asset('pictures/aram_icon.webp') }}" alt="ARAM Icon" class="footer-icon">ARAM</a></li>
                 <li><a href="#"><img src="{{ asset('pictures/arena_icon.webp') }}" alt="Arena Icon" class="footer-icon">Arena</a></li>
-                <li><a href="#"><img src="{{ asset('pictures/5v5_icon.webp') }}" alt="Swiftplay Icon" class="footer-icon">Swiftplay</a></li>
             </ul>
         </div>
 

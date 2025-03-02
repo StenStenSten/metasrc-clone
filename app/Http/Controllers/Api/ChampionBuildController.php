@@ -1,15 +1,15 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use File; // For file handling
+use File;
+use Log;
+use Symfony\Component\DomCrawler\Crawler;
 
 class ChampionBuildController extends Controller
 {
-    // Fetch champion builds based on game mode and champion
     public function show($game_mode, $championName)
     {
         $client = new Client();
@@ -18,87 +18,124 @@ class ChampionBuildController extends Controller
         $metaBuild = null;
 
         try {
-            // Define the path where the extracted data resides (adjust as needed)
-            $extractedPath = storage_path('app/public/dragontail/'); // You can use any folder you prefer
-            
-            // Check if the data exists
+            // Define the path where the extracted data resides
+            $extractedPath = public_path('dragontail/dragontail-15.4.1/15.4.1/data/en_US/champion/');
+            Log::info("Extracted Path: " . $extractedPath);
+
             if (!File::exists($extractedPath)) {
                 throw new \Exception("Data extraction folder not found.");
             }
 
-            // Fetch champion data from the extracted folder (JSON for champion data)
-            $championFile = $extractedPath . "data/en_US/champion.json";
-            if (File::exists($championFile)) {
-                $championData = json_decode(File::get($championFile), true);
+            // Fetch champion data
+            $championFilePath = $extractedPath . "{$championName}.json";
+            Log::info("Champion file path: " . $championFilePath);
+
+            if (File::exists($championFilePath)) {
+                $championData = json_decode(File::get($championFilePath), true);
             } else {
-                throw new \Exception("Champion data file not found.");
+                Log::warning("Champion data file not found for {$championName}.");
             }
 
-            // Fetch item data from the extracted folder (JSON for item data)
-            $itemFile = $extractedPath . "data/en_US/item.json";
+            // Fetch item data
+            $itemFile = public_path('dragontail/dragontail-15.4.1/15.4.1/data/en_US/item.json');
+            Log::info("Item file path: " . $itemFile);
+
             if (File::exists($itemFile)) {
                 $itemData = json_decode(File::get($itemFile), true);
             } else {
-                throw new \Exception("Item data file not found.");
+                Log::warning("Item data file not found.");
             }
 
-            // Fetch meta build data from a dynamic source or predefined method
-            $metaBuild = $this->getMetaBuildForChampion($championName, $game_mode);
+            // Scrape meta build data
+            $metaBuild = $this->scrapeChampionBuildFromOpGG($championName);
 
-            // Get the champion details by name
-            $champion = $championData['data'][$championName] ?? null;
+            // Ensure the scraper works
+            Log::info("Scraped Data: " . json_encode($metaBuild));
 
-            // Handle case where champion data is not found
-            if (!$champion) {
+            // If champion data is missing, but scraping works, return scraped data
+            if (!$championData && $metaBuild) {
+                return response()->json([
+                    'champion' => null,
+                    'metaBuild' => $metaBuild,
+                    'gameMode' => $game_mode,
+                    'buildItems' => []
+                ], 200);
+            }
+
+            if (!$championData) {
                 return response()->json(['error' => 'Champion not found'], 404);
             }
 
             // Prepare build items based on the meta build
-            $buildItems = $this->prepareBuildItems($metaBuild['recommended_items'], $itemData);
+            $buildItems = $this->prepareBuildItems($metaBuild['recommended_items'] ?? [], $itemData);
 
-            // Return the response as JSON with champion data, build items, and meta build
             return response()->json([
-                'champion' => $champion,
+                'champion' => $championData['data'][$championName] ?? null,
                 'metaBuild' => $metaBuild,
                 'gameMode' => $game_mode,
                 'buildItems' => $buildItems,
             ], 200);
 
         } catch (\Exception $e) {
-            // Catch all exceptions and return an error response
+            Log::error("Error in show method: " . $e->getMessage());
             return response()->json(['error' => 'Failed to fetch champion data. ' . $e->getMessage()], 500);
         }
     }
 
-    // Fetch meta build for a given champion and game mode (dynamically)
-    private function getMetaBuildForChampion($championName, $game_mode)
+    public function scrapeChampionBuildFromOpGG($championName)
     {
-        // Here, you'd fetch the meta build from a source or API (could be dynamically based on game mode)
-        // As an example, we are just returning predefined build data (this can be extended with actual logic)
-        return [
-            'recommended_items' => [
-                'Mythic Item' => 'Galeforce',
-                'Core Item' => 'Kraken Slayer',
-                'Boots' => 'Berserker\'s Greaves',
-                'Situational Item' => 'Guardian Angel',
-            ],
-            'recommended_runes' => [
-                'Primary' => 'Precision',
-                'Secondary' => 'Domination',
-            ],
-            'summoner_spells' => ['Flash', 'Ignite'],
-        ];
+        try {
+            $client = new Client();
+            $url = "https://www.op.gg/champions/" . strtolower($championName) . "/build";
+            
+            Log::info("Fetching OP.GG URL: " . $url);
+
+            $response = $client->get($url, [
+                'headers' => [
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
+                ],
+                'verify' => false, // Disable SSL verification
+            ]);
+
+            $html = $response->getBody()->getContents();
+            
+            // Log first 500 characters to check response
+            Log::info("HTML response from OP.GG: " . substr($html, 0, 500));
+
+            $crawler = new Crawler($html);
+
+            // Extract core build items
+            $items = $crawler->filter('.css-1wvfkid.e1wc33z60 img')->each(function ($node) {
+                return $node->attr('alt'); // Extract item name from alt text
+            });
+
+            // Extract primary runes
+            $runes = $crawler->filter('.perk-page img')->each(function ($node) {
+                return $node->attr('alt'); // Extract rune names
+            });
+
+            // Extract summoner spells
+            $summonerSpells = $crawler->filter('.summoner-spells img')->each(function ($node) {
+                return $node->attr('alt'); // Extract spell names
+            });
+
+            return [
+                'items' => $items,
+                'runes' => $runes,
+                'summonerSpells' => $summonerSpells,
+            ];
+        } catch (\Exception $e) {
+            Log::error("Scraping failed for $championName: " . $e->getMessage());
+            return null;
+        }
     }
 
-    // Prepare build items based on the recommended items from the meta build
     private function prepareBuildItems($recommendedItems, $itemData)
     {
         $buildItems = [];
-        
-        foreach ($recommendedItems as $type => $itemName) {
-            // Get item ID from the predefined name
-            $itemId = $this->getItemIdFromName($itemName, $itemData);
 
+        foreach ($recommendedItems as $type => $itemName) {
+            $itemId = $this->getItemIdFromName($itemName, $itemData);
             if ($itemId) {
                 $buildItems[] = [
                     'name' => $itemName,
@@ -112,15 +149,13 @@ class ChampionBuildController extends Controller
         return $buildItems;
     }
 
-    // Fetch item ID from Riot's item data based on the item name
     private function getItemIdFromName($itemName, $itemData)
     {
-        foreach ($itemData['data'] as $itemId => $item) {
+        foreach ($itemData['data'] ?? [] as $itemId => $item) {
             if (strtolower($item['name']) === strtolower($itemName)) {
                 return $itemId;
             }
         }
-
         return null;
     }
 }

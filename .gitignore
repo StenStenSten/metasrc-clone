@@ -22,4 +22,6 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
-storage/app/public/dragontail/
+storage/app/public/dragontail/*
+/public/dragontail/
+

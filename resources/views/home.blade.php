@@ -56,12 +56,6 @@
                         <p class="under-text">Arena</p>
                     </a>
                 </div>
-                <div class="section-item">
-                    <a href="/league/swiftplay" class="flex items-center">
-                        <img src="{{ asset('pictures/5v5_icon.webp') }}" alt="Swiftplay Icon" class="icon-small">
-                        <p class="under-text">Swiftplay</p>
-                    </a>
-                </div>
             </div>
 
             <!-- Box 2: Teamfight Tactics -->

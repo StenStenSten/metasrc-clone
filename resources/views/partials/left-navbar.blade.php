@@ -16,9 +16,6 @@
                 <li><a href="/league/arena">
                     <img src="{{ asset('pictures/arena_icon.webp') }}" alt="Arena Icon"> Arena
                 </a></li>
-                <li><a href="/league/swiftplay">
-                    <img src="{{ asset('pictures/5v5_icon.webp') }}" alt="Swiftplay Icon"> Swiftplay
-                </a></li>
             </ul>
         </li>
 
