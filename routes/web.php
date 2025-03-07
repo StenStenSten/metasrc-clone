@@ -6,6 +6,7 @@ use App\Http\Controllers\TftController;
 use App\Http\Controllers\ValoController;
 use App\Http\Controllers\Api\ChampionController;
 use App\Http\Controllers\Api\ChampionBuildController;
+use App\Http\Controllers\RiotController;
 
 Route::get('/', function () {
     return view('home');
@@ -31,3 +32,7 @@ Route::get('/tft/tocker', [TftController::class, 'tocker'])->name('tft.tocker');
 
 // Valorant Routes
 Route::get('/valorant/valoranked', [ValoController::class, 'valoranked'])->name('valorant.ranked');
+
+//riot api route
+Route::get('/summoner/{summonerName}/store-matches-recursively', [RiotController::class, 'storeMatchesRecursively'])->name('riot.storeMatchesRecursively');
+Route::get('/fetch-summoner/{summonerName}/{tag}', [RiotController::class, 'fetchSummonerData']);
