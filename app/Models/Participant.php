@@ -10,7 +10,7 @@ class Participant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'match_id', 'summoner_id', 'champion_id', 'kills', 'deaths', 'assists', 'items'
+        'match_id', 'summoner_id','puuid', 'champion_id', 'kills', 'deaths', 'assists', 'items'
     ];
 
     protected $casts = [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use Illuminate\Http\Response; // Add this line to handle responses
 
 class ChampionController extends Controller
 {
@@ -43,11 +44,12 @@ class ChampionController extends Controller
             // Get meta build based on the game mode (ranked, aram, etc.)
             $meta_build = $this->getMetaBuild($game_mode, $champion_name);
 
-            // Pass data to Blade view
-            return view('champions.show', compact('champion_data', 'meta_build', 'game_mode'));
+            // Force the response to be HTML instead of JSON
+            return response()->view('league.champions-show', compact('champion_data', 'meta_build', 'game_mode'), 200)
+                             ->header('Content-Type', 'text/html');
 
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            return view('champions.show')->with('error', 'Failed to fetch champion data.');
+            return view('league.champions-show')->with('error', 'Failed to fetch champion data.');
         }
     }
 

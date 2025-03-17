@@ -15,7 +15,13 @@ return new class extends Migration
             $table->id();  // Auto-incrementing primary key
             $table->string('match_id')->unique();  // Match ID from Riot API (ensure uniqueness)
             $table->string('game_mode');  // Game mode like "Ranked", "ARAM", etc.
-            $table->integer('queue_type');  // Queue ID like 420 for Ranked Solo
+            $table->integer('queue_type'); 
+            $table->text('items'); 
+            $table->text('runes');
+            $table->text('summoner_spells');
+            $table->integer('kills');
+            $table->integer('deaths');
+            $table->integer('assists');
             $table->timestamps();  // Created at and updated at timestamps
         });
     }

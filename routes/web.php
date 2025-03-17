@@ -19,10 +19,10 @@ Route::get('/league/arena', [LeagueController::class, 'arena'])->name('league.ar
 Route::get('/league/swiftplay', [LeagueController::class, 'swiftplay'])->name('league.swiftplay');
 
 // Fetch league champions from API (you can adjust this if needed)
-Route::get('/league/champions', [ChampionController::class, 'getChampions'])->name('league.champions');
+Route::get('/league/champions', [ChampionController::class, 'index'])->name('league.champions');
 
 // Champion-specific routes for different game modes (Ranked, ARAM, Arena, Swiftplay)
-Route::get('/{game_mode}/champion/{champion_name}', [ChampionBuildController::class, 'show'])->name('champion.show');
+Route::get('/{game_mode}/champion/{champion_name}', [ChampionController::class, 'show'])->name('league.champion-show');
 
 // TFT Routes
 Route::get('/tft/ranked', [TftController::class, 'tftranked'])->name('tft.ranked');
@@ -33,6 +33,6 @@ Route::get('/tft/tocker', [TftController::class, 'tocker'])->name('tft.tocker');
 // Valorant Routes
 Route::get('/valorant/valoranked', [ValoController::class, 'valoranked'])->name('valorant.ranked');
 
-//riot api route
+// Riot API route
 Route::get('/summoner/{summonerName}/store-matches-recursively', [RiotController::class, 'storeMatchesRecursively'])->name('riot.storeMatchesRecursively');
 Route::get('/fetch-summoner/{summonerName}/{tag}', [RiotController::class, 'fetchSummonerData']);
