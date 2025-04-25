@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Participant;
-use App\Services\RiotService;  
+use App\Services\RiotService;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;  
 
 class FetchMatchData extends Command
 {
@@ -28,9 +28,12 @@ class FetchMatchData extends Command
         // Fetch the summoner's details using the summoner name and tag
         $summoner = $this->riotService->getSummonerByName($summonerName, $tag);
 
-        // Check if the summoner exists
-        if (!$summoner) {
-            $this->error("Summoner not found: {$summonerName}");
+        // Log the response to understand its structure
+        Log::info('Summoner response:', $summoner);
+
+        // Check if the summoner exists and if 'puuid' is set
+        if (!$summoner || !isset($summoner['puuid'])) {
+            $this->error("Summoner not found or PUUID not found: {$summonerName}");
             return;
         }
 
@@ -43,10 +46,12 @@ class FetchMatchData extends Command
         // Iterate through the match IDs and fetch match details for each match
         foreach ($matchIds as $matchId) {
             // Fetch and store match details
-            $this->riotService->storeMatchData($matchId, $tag);
+            $this->riotService->storeMatchData($matchId, $tag, $summonerName);
         }
 
         $this->info('Match data fetching completed!');
     }
 }
+
+
 

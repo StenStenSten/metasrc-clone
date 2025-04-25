@@ -15,39 +15,48 @@ class RiotService
         $this->apiKey = env('RIOT_API_KEY');
     }
 
-    public function getSummonerByName($summonerName, $tag)
+    public function getSummonerByName($summonerName, $region)
     {
-        // Construct the correct base URL based on tag
-        $tagUrls = [
-            'na' => 'na1',
-            'euw' => 'euw1',
-            'kr' => 'kr',
+        // URL-encode the summoner name to handle special characters
+        $encodedSummonerName = urlencode($summonerName);
+
+        // Map regions to Riot API regions
+        $regionUrls = [
+            'europe' => 'europe',  // Europe
+            'america' => 'america', // America
+            'asia' => 'asia',       // Asia
         ];
 
-        $region = $tagUrls[$tag] ?? 'euw1';  // Default to 'euw1' if no tag is found
+        // Default to 'europe' if region is not recognized
+        $region = $regionUrls[$region] ?? 'europe';
 
         // Get the summoner data using the correct region URL
         $response = Http::withOptions([
             'verify' => false,  // Disable SSL verification
-        ])->get("https://{$region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{$summonerName}", [
+        ])->get("https://{$region}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{$encodedSummonerName}", [
             'api_key' => $this->apiKey
         ]);
-    
+
+        // Return the response JSON
         return $response->json();
     }
 
-    public function getMatchHistory($puuid, $tag, $count = 10)
+    public function getMatchHistory($puuid, $region, $count = 10)
     {
-        $tagUrls = [
-            'na' => 'na1',
-            'euw' => 'euw1',
-            'kr' => 'kr',
+        // Map regions to Riot API regions
+        $regionUrls = [
+            'europe' => 'europe',  // Europe
+            'america' => 'america', // America
+            'asia' => 'asia',       // Asia
         ];
 
-        $region = $tagUrls[$tag] ?? 'euw1';  // Default to 'euw1' if no tag is found
+        // Default to 'europe' if region is not recognized
+        $region = $regionUrls[$region] ?? 'europe';
 
-        // Fetch match history for the summoner based on tag
-        $response = Http::get("https://{$region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{$puuid}/ids", [
+        // Fetch match history for the summoner based on region
+        $response = Http::withOptions([
+            'verify' => false,  // Disable SSL verification
+        ])->get("https://{$region}.api.riotgames.com/lol/match/v5/matches/by-puuid/{$puuid}/ids", [
             'api_key' => $this->apiKey,
             'count' => $count,
         ]);
@@ -55,18 +64,19 @@ class RiotService
         return $response->json();
     }
 
-    // Updated function to accept $summonerName as an argument
-    public function getMatchDetails($matchId, $tag, $summonerName)
+    public function getMatchDetails($matchId, $region, $summonerName)
     {
-        $tagUrls = [
-            'na' => 'na1',
-            'euw' => 'euw1',
-            'kr' => 'kr',
+        // Map regions to Riot API regions
+        $regionUrls = [
+            'europe' => 'europe',  // Europe
+            'america' => 'america', // America
+            'asia' => 'asia',       // Asia
         ];
 
-        $region = $tagUrls[$tag] ?? 'euw1';  // Default to 'euw1' if no tag is found
+        // Default to 'europe' if region is not recognized
+        $region = $regionUrls[$region] ?? 'europe';
 
-        // Fetch match details based on tag and pass the correct $summonerName
+        // Fetch match details based on region and pass the correct $summonerName
         $response = Http::withOptions([
             'verify' => false,  // Disable SSL verification
         ])->get("https://{$region}.api.riotgames.com/lol/match/v5/matches/{$matchId}", [
@@ -76,10 +86,10 @@ class RiotService
         return $response->json();
     }
 
-    public function storeMatchData($matchId, $tag, $summonerName)
+    public function storeMatchData($matchId, $region, $summonerName)
     {
         // Fetch match details
-        $matchData = $this->getMatchDetails($matchId, $tag, $summonerName); // Pass $summonerName here
+        $matchData = $this->getMatchDetails($matchId, $region, $summonerName); // Pass $summonerName here
 
         // Ensure that match data exists and is valid
         if (!$matchData || !isset($matchData['info'])) {
@@ -123,43 +133,33 @@ class RiotService
         Log::info('Match data stored successfully.');
     }
 
-    public function storeMatchesForSummonerRecursively($summonerName, $tag, $maxDepth = 2, $currentDepth = 0)
+    public function storeMatchesForSummonerRecursivelyFromPuuid($puuid, $region, $maxDepth = 2, $currentDepth = 0)
     {
         // Prevent going beyond max depth
         if ($currentDepth >= $maxDepth) {
             return;
         }
 
-        // Get the summoner by name and tag
-        $summoner = $this->getSummonerByName($summonerName, $tag);
-
-        if (!$summoner) {
-            return; // If summoner is not found, exit
-        }
-
-        $puuid = $summoner['puuid'];
-
-        // Fetch match history for this summoner
-        $matchIds = $this->getMatchHistory($puuid, $tag, 10); // Adjust number of matches as needed
+        // Fetch match history for the given PUUID
+        $matchIds = $this->getMatchHistory($puuid, $region, 10); // Fetch 10 matches or adjust the count
 
         // For each match in the history
         foreach ($matchIds as $matchId) {
             // Store match data
-            $this->storeMatchData($matchId, $tag, $summonerName); // Pass $summonerName here
+            $this->storeMatchData($matchId, $region, $puuid); // Pass the PUUID here for consistency
 
             // Fetch the match details
-            $matchDetails = $this->getMatchDetails($matchId, $tag, $summonerName); // Pass $summonerName here
+            $matchDetails = $this->getMatchDetails($matchId, $region, $puuid); // Pass PUUID here for participant lookup
 
             // Iterate through participants in the match
             foreach ($matchDetails['info']['participants'] as $participantData) {
-                $participantSummonerName = $participantData['summonerName'];
+                $participantPuuid = $participantData['puuid']; // Get the PUUID of the participant
 
                 // Recursively call this function for each participant (if they are not the original summoner)
-                if ($participantSummonerName !== $summonerName) {
-                    $this->storeMatchesForSummonerRecursively($participantSummonerName, $tag, $maxDepth, $currentDepth + 1);
+                if ($participantPuuid !== $puuid) {
+                    $this->storeMatchesForSummonerRecursivelyFromPuuid($participantPuuid, $region, $maxDepth, $currentDepth + 1);
                 }
             }
         }
     }
 }
-

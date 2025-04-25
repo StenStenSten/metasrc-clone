@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('match_id')->unique();  // Match ID from Riot API (ensure uniqueness)
             $table->string('game_mode');  // Game mode like "Ranked", "ARAM", etc.
             $table->integer('queue_type'); 
-            $table->text('items'); 
+            $table->text('items')->nullable(); 
             $table->text('runes');
             $table->text('summoner_spells');
             $table->integer('kills');
