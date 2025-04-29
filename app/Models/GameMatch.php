@@ -10,7 +10,13 @@ class GameMatch extends Model
     use HasFactory;
 
     protected $fillable = [
-        'match_id', 'game_mode', 'queue_type'
+        'match_id', 
+        'game_mode', 
+        'queue_type',
+        'game_type',  
+        'game_version', 
+        'game_start_time', 
+        'duration' 
     ];
 
     public function participants()

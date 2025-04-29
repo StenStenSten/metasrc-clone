@@ -10,13 +10,31 @@ class CreateParticipantsTable extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('match_id')->constrained()->onDelete('cascade');
-            $table->integer('summoner_id'); // Store summoner id or username if needed
-            $table->integer('champion_id'); // Champion ID or name
-            $table->integer('kills');
-            $table->integer('deaths');
-            $table->integer('assists');
-            $table->json('items'); // Store items in JSON format for this match
+
+            // Foreign key linking to the game_matches table
+            $table->foreignId('match_id')->constrained('game_matches')->onDelete('cascade');
+
+            // Riot API data
+            $table->string('puuid'); // Riot's globally unique player ID
+            $table->string('summoner_name'); // Optional but helpful
+            $table->integer('champion_id');
+            $table->integer('champ_level')->nullable();
+            $table->integer('team_id')->nullable(); // 100 or 200
+            $table->integer('kills')->nullable();
+            $table->integer('deaths')->nullable();
+            $table->integer('assists')->nullable();
+
+            // Items & runes
+            $table->json('items')->nullable(); // Items 0–6 or more as array
+            $table->json('runes')->nullable(); // primary + secondary paths
+
+            // Summoner spells
+            $table->integer('spell1_id')->nullable();
+            $table->integer('spell2_id')->nullable();
+
+            // Other stats (if you want later)
+            $table->boolean('win')->nullable();
+
             $table->timestamps();
         });
     }

@@ -10,16 +10,24 @@ class Participant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'match_id', 'summoner_id','puuid', 'champion_id', 'kills', 'deaths', 'assists', 'items'
+        'match_id', 
+        'summoner_id', 
+        'puuid', 
+        'champion_id', 
+        'kills', 
+        'deaths', 
+        'assists', 
+        'items'
     ];
 
     protected $casts = [
-        'items' => 'array',  // This ensures the 'items' attribute is cast to an array
+        'items' => 'array',  // Casts 'items' as an array for easier access
     ];
 
-    // Relationship with game match
+    // Relationship with GameMatch
     public function gameMatch()  
     {
         return $this->belongsTo(GameMatch::class);  
     }
 }
+
